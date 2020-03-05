@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+    <script>
+        function CreateElement(el){
+           return document.createElement(el);
+        }
+        function Append(parent,element){
+            return document.getElementById(parent).appendChild(element);
+        }
+        const ul=document.getElementById("name");
+        const url="https://o136z8hk40.execute-api.us-east-1.amazonaws.com/dev/get-list-of-conferences";
+        $(document).ready(function(){
+            
+                
+                $.getJSON(url,function(data){
+                    $.each(data.free,function(key,val){
+                        $("#row1").append(`<div class="shadow" style="width:350px;margin:20px; padding:30px;">
+                            <div class="col">
+                            <div class="text-white btn btn-danger" style="position:absolute;margin:auto; top:1px; right:10px">Free</div><br>
+                    <div class="text-center"><img src=${val.imageURL} width="100px" height="100px" alt="image"></div><br>
+                    <div><b>Date:</b> ${val.confStartDate}</div>
+                    <div><b>Conference Name:</b> ${val.confName}</div>
+                    <div><b>Venue:</b> ${val.venue}</div>
+                    <span><b>Link: </b></span><div style="display:inline; font-size:0.7em"><b></b><a href=${val.confUrl}>${val.confUrl}</a></div>
+                    
+                    <div>${name}</div>
+                    <div>${name}</div>
+                    <div>${name}</div>
+                    <div>${name}</div>
+                </div>
+                        </div>`)
+                    })
+                    $.each(data.paid,function(key,val){
+                        $("#row1").append(`<div class="shadow" style="width:350px;margin:20px; padding:30px;">
+                            <div class="col">
+                            <div class="text-white btn btn-danger" style="position:absolute; top:1px; right:10px">Paid</div><br>
+                    <div class="text-center"><img src=${val.imageURL} width="100px" height="100px" alt="image"></div>
+                    <div><b>Date:</b> ${val.confStartDate}</div>
+                    <div><b>Conference Name:</b> ${val.confName}</div>
+                    <div><b>Venue:</b> ${val.venue}</div>
+                    <div style="font-size:0.7em"><b>Link: </b><a  href=${val.confUrl}>${val.confUrl}</a></div>
+                    <div>${name}</div>
+                    <div>${name}</div>
+                    <div>${name}</div>
+                    <div>${name}</div>
+                </div>
+                        </div>`)
+                    })
+                })
+            
+        })
+       
+    </script>
+</head>
+<body onload="bodyload()">
+    <div class="container">
+        
+        <div id="name" class="card-deck">
+            <div id="row1" class="row">
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
